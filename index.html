@@ -37,6 +37,54 @@
             min-height: 100vh;
         }
 
+        /* --- PRIVACY MODAL STYLES (ЖАҢА) --- */
+        #privacy-overlay {
+            position: fixed; /* Fixed қылу керек, экранды толық жабу үшін */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .privacy-box {
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            width: 85%;
+            max-width: 500px;
+            max-height: 90vh;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .privacy-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            background: var(--bg-color);
+            padding: 15px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.5;
+        }
+        
+        /* Скроллбар */
+        .privacy-content::-webkit-scrollbar { width: 8px; }
+        .privacy-content::-webkit-scrollbar-track { background: var(--bg-color); }
+        .privacy-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+        /* --- НЕГІЗГІ КОНТЕЙНЕР --- */
         .container {
             background: var(--card-bg);
             width: 90%;
@@ -50,9 +98,9 @@
             padding: 2rem;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
-        /* Заголовки */
         h1, h2 {
             text-align: center;
             color: var(--accent);
@@ -171,9 +219,10 @@
 
         /* УТИЛИТЫ */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeScreen { from { opacity: 0; } to { opacity: 1; } }
+
         .screen { display: none; height: 100%; flex-direction: column; }
         .screen.active { display: flex; animation: fadeScreen 0.3s ease; }
-        @keyframes fadeScreen { from { opacity: 0; } to { opacity: 1; } }
         .hidden { display: none !important; }
         
         .score-display { font-size: 4rem; font-weight: bold; color: var(--accent); margin: 20px 0; text-align: center; }
@@ -194,11 +243,7 @@
             margin-bottom: 15px;
             border: 1px solid var(--border);
         }
-        .review-q {
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-main);
-        }
+        .review-q { font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
         .review-correct { color: var(--success); }
         .review-wrong { color: var(--error); }
         .review-label { font-size: 0.85rem; color: var(--text-dim); margin-right: 10px; }
@@ -207,6 +252,63 @@
 </head>
 <body>
 
+    <div id="privacy-overlay">
+        <div class="privacy-box">
+            <div class="privacy-content">
+                <h3 style="color: var(--accent); margin-top: 0; border-bottom: 1px dashed var(--border); padding-bottom: 10px;">
+                    # AGREEMENT_LICENSE.md
+                </h3>
+
+                <div style="margin-bottom: 20px; padding: 10px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--error);">
+                    <strong style="color: var(--error);">[!] WARNING / ЕСКЕРТУ:</strong>
+                    <br><br>
+                    
+                    <span style="color: var(--text-main);">KZ:</span> 
+                    Бұл сайт <strong>ресми AITU колледжінің</strong> жүйесі ЕМЕС. Мұғалімдерге қатысы жоқ. Жауаптарда қателер болуы мүмкін.
+                    <br><br>
+
+                    <span style="color: var(--text-main);">RU:</span> 
+                    Сайт НЕ является официальной системой <strong>AITU College</strong>. Связи с учителями нет. Ответы могут содержать ошибки.
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: var(--accent);">const ACCESS_LEVEL = "PRIVATE";</strong>
+                    <br><br>
+                    
+                    <span style="color: var(--text-main);">KZ/RU:</span> 
+                    Сілтемені басқаларға беруге, сатуға немесе чаттарға жіберуге 
+                    <span style="color: var(--error); font-weight: bold;">ТЫЙЫМ САЛЫНАДЫ (BANNED)</span>. 
+                    <br>
+                    Доступ платный и персональный.
+                </div>
+
+                <div style="margin-bottom: 15px; border: 1px solid var(--border); padding: 10px; border-radius: 4px;">
+                    <strong style="color: var(--success);">function REPORT_BUG(proof) {</strong>
+                    <br><br>
+                    
+                    <span style="color: var(--text-dim);">// Егер қате тапсаңыз / Если нашли ошибку:</span><br>
+                    <span style="color: var(--text-main);">KZ:</span> Скриншот немесе дәлелді бізге жіберіңіз, біз түзетеміз.<br>
+                    <span style="color: var(--text-main);">RU:</span> Скиньте скриншот или пруфы, мы исправим/решим вопрос.
+                    <br><br>
+                    
+                    <span style="color: var(--accent);">return</span> 
+                    <a href="https://t.me/akanaa0" target="_blank" style="color: #3b82f6; text-decoration: none; border-bottom: 1px solid #3b82f6; font-weight: bold;">
+                        @akanaa0
+                    </a>;
+                    <br>
+                    <strong style="color: var(--success);">}</strong>
+                </div>
+
+                <p style="color: var(--text-dim); font-size: 0.75rem; margin-top: 20px;">
+                    // Click "ACCEPT" to agree with terms.<br>
+                </p>
+            </div>
+
+            <button class="btn btn-primary" onclick="acceptPrivacy()">
+                sudo accept --agree (Келісемін)
+            </button>
+        </div>
+    </div>
     <div class="container">
         
         <div id="screen-menu" class="screen active">
@@ -311,10 +413,19 @@
             goHome();
         }
 
+        // --- PRIVACY LOGIC (NEW) ---
+        function acceptPrivacy() {
+            const overlay = document.getElementById('privacy-overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
+        }
+
         // --- LOGIC ---
         function selectSubject(subj) {
             if (typeof database === 'undefined' || !database[subj]) {
-                alert("Error 404: Questions not found in database.");
+                alert("Error 404: Questions not found in database (questions.js).");
                 return;
             }
             currentSubject = subj;
@@ -375,7 +486,7 @@
             startTimer();
         }
 
-        // --- ТАЙМЕР ЛОГИКАСЫ (МАҢЫЗДЫ ӨЗГЕРІС) ---
+        // --- ТАЙМЕР ---
         function startTimer() {
             clearInterval(timer);
             timeLeft = TIME_LIMIT_SECONDS;
@@ -414,7 +525,6 @@
             highlightCorrect();
             document.getElementById('btn-next').classList.remove('hidden');
         }
-        // --- ТАЙМЕР ЛОГИКАСЫ АЯҚТАЛДЫ ---
 
         function checkAnswer(selectedIndex, btn) {
             if(isAnswered) return;
@@ -497,10 +607,8 @@
                 const item = document.createElement('div');
                 item.className = 'review-item';
                 
-                // 1. Сұрақ
                 item.innerHTML += `<div class="review-q">Q${a.qIndex + 1}: ${a.question}</div>`;
                 
-                // 2. Дұрыс жауап
                 item.innerHTML += `
                     <div>
                         <span class="review-label">Дұрыс:</span> 
@@ -508,7 +616,6 @@
                     </div>
                 `;
                 
-                // 3. Сенің жауабың
                 let userChoiceText;
                 
                 if (a.isTimeout) {
