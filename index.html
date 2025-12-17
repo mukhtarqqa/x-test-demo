@@ -11,15 +11,15 @@
 
     <style>
         :root {
-            /* Цвета как в редакторе кода */
-            --bg-color: #0f172a;      /* Темно-синий фон */
-            --card-bg: #1e293b;       /* Цвет панели */
-            --accent: #3b82f6;        /* Синий акцент */
-            --text-main: #e2e8f0;     /* Светлый текст */
-            --text-dim: #94a3b8;      /* Тусклый текст */
-            --success: #10b981;       /* Зеленый */
-            --error: #ef4444;         /* Красный */
-            --border: #334155;        /* Границы */
+            /* Цвета */
+            --bg-color: #0f172a;      
+            --card-bg: #1e293b;       
+            --accent: #3b82f6;        
+            --text-main: #e2e8f0;     
+            --text-dim: #94a3b8;      
+            --success: #10b981;       
+            --error: #ef4444;         
+            --border: #334155;        
         }
 
         body {
@@ -37,9 +37,9 @@
             min-height: 100vh;
         }
 
-        /* --- PRIVACY MODAL STYLES (ЖАҢА) --- */
+        /* --- PRIVACY MODAL --- */
         #privacy-overlay {
-            position: fixed; /* Fixed қылу керек, экранды толық жабу үшін */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -79,12 +79,11 @@
             line-height: 1.5;
         }
         
-        /* Скроллбар */
         .privacy-content::-webkit-scrollbar { width: 8px; }
         .privacy-content::-webkit-scrollbar-track { background: var(--bg-color); }
         .privacy-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-        /* --- НЕГІЗГІ КОНТЕЙНЕР --- */
+        /* --- CONTAINER --- */
         .container {
             background: var(--card-bg);
             width: 90%;
@@ -111,7 +110,7 @@
 
         p { text-align: center; color: var(--text-dim); font-size: 0.9rem; }
 
-        /* --- КНОПКИ --- */
+        /* --- BUTTONS --- */
         .btn {
             background: transparent;
             border: 1px solid var(--border);
@@ -154,6 +153,19 @@
         }
         .btn-primary:hover::before { content: ""; }
 
+        /* TELEGRAM BUTTON STYLE */
+        .btn-tg {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-tg:hover {
+            background: rgba(59, 130, 246, 0.2);
+            padding-left: 15px; /* Centered text shouldn't move too much, but effect stays */
+        }
+
         .option-btn {
             background: #0f172a;
             border: 1px solid var(--border);
@@ -176,7 +188,7 @@
         .correct { border-color: var(--success) !important; background: rgba(16, 185, 129, 0.1) !important; color: var(--success); }
         .wrong { border-color: var(--error) !important; background: rgba(239, 68, 68, 0.1) !important; color: var(--error); }
 
-        /* --- ТАЙМЕР --- */
+        /* --- TIMER & UTILS --- */
         .quiz-header {
             display: flex;
             justify-content: space-between;
@@ -217,7 +229,6 @@
         }
         .btn-exit:hover { background: var(--error); color: white; }
 
-        /* УТИЛИТЫ */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeScreen { from { opacity: 0; } to { opacity: 1; } }
 
@@ -227,7 +238,6 @@
         
         .score-display { font-size: 4rem; font-weight: bold; color: var(--accent); margin: 20px 0; text-align: center; }
 
-        /* --- БЛОК ОШИБОК (Review) --- */
         #review-container {
             margin-top: 30px;
             padding-top: 20px;
@@ -262,11 +272,9 @@
                 <div style="margin-bottom: 20px; padding: 10px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--error);">
                     <strong style="color: var(--error);">[!] WARNING / ЕСКЕРТУ:</strong>
                     <br><br>
-                    
                     <span style="color: var(--text-main);">KZ:</span> 
                     Бұл сайт <strong>ресми AITU колледжінің</strong> жүйесі ЕМЕС. Мұғалімдерге қатысы жоқ. Жауаптарда қателер болуы мүмкін.
                     <br><br>
-
                     <span style="color: var(--text-main);">RU:</span> 
                     Сайт НЕ является официальной системой <strong>AITU College</strong>. Связи с учителями нет. Ответы могут содержать ошибки.
                 </div>
@@ -274,7 +282,6 @@
                 <div style="margin-bottom: 20px;">
                     <strong style="color: var(--accent);">const ACCESS_LEVEL = "PRIVATE";</strong>
                     <br><br>
-                    
                     <span style="color: var(--text-main);">KZ/RU:</span> 
                     Сілтемені басқаларға беруге, сатуға немесе чаттарға жіберуге 
                     <span style="color: var(--error); font-weight: bold;">ТЫЙЫМ САЛЫНАДЫ (BANNED)</span>. 
@@ -285,12 +292,10 @@
                 <div style="margin-bottom: 15px; border: 1px solid var(--border); padding: 10px; border-radius: 4px;">
                     <strong style="color: var(--success);">function REPORT_BUG(proof) {</strong>
                     <br><br>
-                    
                     <span style="color: var(--text-dim);">// Егер қате тапсаңыз / Если нашли ошибку:</span><br>
                     <span style="color: var(--text-main);">KZ:</span> Скриншот немесе дәлелді бізге жіберіңіз, біз түзетеміз.<br>
                     <span style="color: var(--text-main);">RU:</span> Скиньте скриншот или пруфы, мы исправим/решим вопрос.
                     <br><br>
-                    
                     <span style="color: var(--accent);">return</span> 
                     <a href="https://t.me/akanaa0" target="_blank" style="color: #3b82f6; text-decoration: none; border-bottom: 1px solid #3b82f6; font-weight: bold;">
                         @akanaa0
@@ -315,12 +320,19 @@
             <h1>&lt;DevQuiz /&gt;</h1>
             <p>Select your stack:</p>
             
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 20px;">
                 <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.1s" onclick="selectSubject('python')">Python_Kz</button>
                 <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.2s" onclick="selectSubject('db')">Database_Kz</button>
                 <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.3s" onclick="selectSubject('python_ru')">Python_Ru</button>
                 <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.4s" onclick="selectSubject('db_ru')">Database_Ru</button>
             </div>
+
+            <div style="margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 15px; animation: fadeInUp 0.3s ease backwards 0.5s;">
+                <button class="btn btn-tg" onclick="window.open('https://t.me/akanaa0', '_blank')">
+                    > Contact Support (Debug)
+                </button>
+            </div>
+
         </div>
 
         <div id="screen-variants" class="screen">
@@ -391,7 +403,6 @@
         let timer = null;
         let timeLeft = 0;
         let isAnswered = false;
-        
         let userAnswers = [];
 
         // --- UTILS ---
@@ -413,7 +424,7 @@
             goHome();
         }
 
-        // --- PRIVACY LOGIC (NEW) ---
+        // --- PRIVACY LOGIC ---
         function acceptPrivacy() {
             const overlay = document.getElementById('privacy-overlay');
             overlay.style.opacity = '0';
@@ -520,7 +531,6 @@
             document.getElementById('lbl-feedback').style.color = "var(--error)";
             
             saveAnswer(-1); 
-            
             blockAll();
             highlightCorrect();
             document.getElementById('btn-next').classList.remove('hidden');
@@ -547,7 +557,6 @@
             }
             
             saveAnswer(selectedIndex, isCorrect);
-
             document.getElementById('lbl-score').innerText = score;
             blockAll();
             document.getElementById('btn-next').classList.remove('hidden');
@@ -588,7 +597,6 @@
             document.getElementById('lbl-result-pct').innerText = pct + '%';
             document.getElementById('lbl-result-count').innerText = score;
             document.getElementById('lbl-total').innerText = questions.length;
-            
             renderReview();
         }
 
@@ -617,7 +625,6 @@
                 `;
                 
                 let userChoiceText;
-                
                 if (a.isTimeout) {
                     userChoiceText = 'Жауап берілмеді (TIMEOUT)';
                 } else if (a.selectedIndex >= 0) {
