@@ -12,14 +12,15 @@
     <style>
         :root {
             /* Цвета */
-            --bg-color: #0f172a;      
-            --card-bg: #1e293b;       
-            --accent: #3b82f6;        
-            --text-main: #e2e8f0;     
-            --text-dim: #94a3b8;      
-            --success: #10b981;       
-            --error: #ef4444;         
-            --border: #334155;        
+            --bg-color: #0f172a;       
+            --card-bg: #1e293b;        
+            --accent: #3b82f6;         
+            --text-main: #e2e8f0;      
+            --text-dim: #94a3b8;       
+            --success: #10b981;        
+            --error: #ef4444;          
+            --warning: #f59e0b;
+            --border: #334155;         
         }
 
         body {
@@ -44,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.98);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -55,7 +56,7 @@
 
         .privacy-box {
             background: var(--card-bg);
-            border: 1px solid var(--accent);
+            border: 1px solid var(--error); /* Red border for warning feeling */
             width: 85%;
             max-width: 500px;
             max-height: 90vh;
@@ -63,7 +64,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);
         }
 
         .privacy-content {
@@ -110,6 +111,19 @@
 
         p { text-align: center; color: var(--text-dim); font-size: 0.9rem; }
 
+        /* WARNING BANNER ON MAIN PAGE */
+        .main-warning {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px dashed var(--error);
+            color: var(--error);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
         /* --- BUTTONS --- */
         .btn {
             background: transparent;
@@ -152,19 +166,6 @@
             padding-left: 15px;
         }
         .btn-primary:hover::before { content: ""; }
-
-        /* TELEGRAM BUTTON STYLE */
-        .btn-tg {
-            border-color: #3b82f6;
-            color: #3b82f6;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .btn-tg:hover {
-            background: rgba(59, 130, 246, 0.2);
-            padding-left: 15px; /* Centered text shouldn't move too much, but effect stays */
-        }
 
         .option-btn {
             background: #0f172a;
@@ -265,48 +266,56 @@
     <div id="privacy-overlay">
         <div class="privacy-box">
             <div class="privacy-content">
-                <h3 style="color: var(--accent); margin-top: 0; border-bottom: 1px dashed var(--border); padding-bottom: 10px;">
-                    # AGREEMENT_LICENSE.md
+                <h3 style="color: var(--error); margin-top: 0; border-bottom: 1px dashed var(--border); padding-bottom: 10px;">
+                    # IMPORTANT_DISCLAIMER.md
                 </h3>
 
-                <div style="margin-bottom: 20px; padding: 10px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid var(--error);">
-                    <strong style="color: var(--error);">[!] WARNING / ЕСКЕРТУ:</strong>
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: var(--text-main);">// ЖАУАПКЕРШІЛІКТЕН БАС ТАРТУ</strong>
                     <br><br>
-                    <span style="color: var(--text-main);">KZ:</span> 
-                    Бұл сайт <strong>ресми AITU колледжінің</strong> жүйесі ЕМЕС. Мұғалімдерге қатысы жоқ. Жауаптарда қателер болуы мүмкін.
+                    Бұл жоба тек <strong>көмек ретінде</strong> (for educational purposes) жасалған. Біз барынша дұрыс жасауға тырыстық, бірақ:
                     <br><br>
-                    <span style="color: var(--text-main);">RU:</span> 
-                    Сайт НЕ является официальной системой <strong>AITU College</strong>. Связи с учителями нет. Ответы могут содержать ошибки.
+                    <ul style="padding-left: 20px; list-style-type: square; color: var(--text-dim);">
+                        <li>Жауаптарда <strong>қателер болуы мүмкін</strong>.</li>
+                        <li>Бұл ресми жүйе емес.</li>
+                        <li>Емтихан нәтижесіне немесе техникалық ақауларға <strong>жауап бермейміз</strong>.</li>
+                    </ul>
                 </div>
-                <div style="margin-bottom: 15px; border: 1px solid var(--border); padding: 10px; border-radius: 4px;">
-                    <strong style="color: var(--success);">function REPORT_BUG(proof) {</strong>
+
+                <div style="margin-bottom: 15px; padding: 10px; background: rgba(239, 68, 68, 0.05); border: 1px solid var(--border); border-radius: 4px;">
+                    <strong style="color: var(--error);">class LiabilityContext {</strong>
                     <br><br>
-                    <span style="color: var(--text-dim);">// Егер қате тапсаңыз / Если нашли ошибку:</span><br>
-                    <span style="color: var(--text-main);">KZ:</span> Скриншот немесе дәлелді бізге жіберіңіз, біз түзетеміз.<br>
-                    <span style="color: var(--text-main);">RU:</span> Скиньте скриншот или пруфы, мы исправим/решим вопрос.
+                    <span style="color: var(--text-dim);">
+                        this.responsibility = <span style="color: var(--accent);">null</span>;<br>
+                        this.guarantee = <span style="color: var(--accent);">false</span>;<br>
+                        this.message = "Сайтты қолдану - өз тәуекеліңізде (Use at your own risk).";
+                    </span>
                     <br><br>
-                    <span style="color: var(--accent);">return</span> 
-                    <a href="https://t.me/akanaa0" target="_blank" style="color: #3b82f6; text-decoration: none; border-bottom: 1px solid #3b82f6; font-weight: bold;">
-                        @akanaa0
-                    </a>;
-                    <br>
-                    <strong style="color: var(--success);">}</strong>
+                    <strong style="color: var(--error);">}</strong>
                 </div>
 
                 <p style="color: var(--text-dim); font-size: 0.75rem; margin-top: 20px;">
-                    // Click "ACCEPT" to agree with terms.<br>
+                    // "I UNDERSTAND" түймесін басу арқылы сіз осы шарттармен келісесіз.<br>
                 </p>
             </div>
 
             <button class="btn btn-primary" onclick="acceptPrivacy()">
-                sudo accept --agree (Келісемін)
+                sudo accept --confirm (Түсіндім)
             </button>
         </div>
     </div>
+
     <div class="container">
         
         <div id="screen-menu" class="screen active">
             <h1>&lt;DevQuiz /&gt;</h1>
+            
+            <div class="main-warning">
+                ⚠️ НАЗАР АУДАРЫҢЫЗ / WARNING:<br>
+                Жауаптар 100% дұрыс емес болуы мүмкін.<br>
+                Answers might be incorrect.
+            </div>
+
             <p>Select your stack:</p>
             
             <div style="margin-top: 20px;">
@@ -316,13 +325,7 @@
                 <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.4s" onclick="selectSubject('db_ru')">Database_Ru</button>
             </div>
 
-            <div style="margin-top: 20px; border-top: 1px dashed var(--border); padding-top: 15px; animation: fadeInUp 0.3s ease backwards 0.5s;">
-                <button class="btn btn-tg" onclick="window.open('https://t.me/akanaa0', '_blank')">
-                    > Contact Support (Debug)
-                </button>
             </div>
-
-        </div>
 
         <div id="screen-variants" class="screen">
             <h2 id="lbl-subject" style="font-size: 1.2rem;">...</h2>
