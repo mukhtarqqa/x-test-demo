@@ -11,15 +11,15 @@
 
     <style>
         :root {
-            /* Цвета */
+            /* Бастапқы түстерге қайту */
             --bg-color: #0f172a;       
             --card-bg: #1e293b;        
-            --accent: #3b82f6;         
+            --accent: #3b82f6;         /* Blue styling */
             --text-main: #e2e8f0;      
             --text-dim: #94a3b8;       
             --success: #10b981;        
             --error: #ef4444;          
-            --warning: #f59e0b;
+            --warning: #f59e0b;        /* Yellow for disclaimer */
             --border: #334155;         
         }
 
@@ -45,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.98);
+            background: rgba(15, 23, 42, 0.95);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -56,7 +56,7 @@
 
         .privacy-box {
             background: var(--card-bg);
-            border: 1px solid var(--error); /* Red border for warning feeling */
+            border: 1px solid var(--accent); /* Blue border again */
             width: 85%;
             max-width: 500px;
             max-height: 90vh;
@@ -64,7 +64,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
         }
 
         .privacy-content {
@@ -113,15 +113,15 @@
 
         /* WARNING BANNER ON MAIN PAGE */
         .main-warning {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px dashed var(--error);
-            color: var(--error);
+            background: rgba(245, 158, 11, 0.1); /* Yellow tint, not red */
+            border: 1px dashed var(--warning);
+            color: var(--warning);
             padding: 10px;
             border-radius: 6px;
             margin-bottom: 20px;
             font-size: 0.8rem;
             text-align: center;
-            font-weight: bold;
+            font-weight: normal;
         }
 
         /* --- BUTTONS --- */
@@ -266,41 +266,37 @@
     <div id="privacy-overlay">
         <div class="privacy-box">
             <div class="privacy-content">
-                <h3 style="color: var(--error); margin-top: 0; border-bottom: 1px dashed var(--border); padding-bottom: 10px;">
-                    # IMPORTANT_DISCLAIMER.md
+                <h3 style="color: var(--accent); margin-top: 0; border-bottom: 1px dashed var(--border); padding-bottom: 10px;">
+                    # DISCLAIMER.md
                 </h3>
 
                 <div style="margin-bottom: 20px;">
-                    <strong style="color: var(--text-main);">// ЖАУАПКЕРШІЛІКТЕН БАС ТАРТУ</strong>
+                    <strong style="color: var(--text-main);">// PLEASE READ / ОҚЫҢЫЗ</strong>
                     <br><br>
-                    Бұл жоба тек <strong>көмек ретінде</strong> (for educational purposes) жасалған. Біз барынша дұрыс жасауға тырыстық, бірақ:
+                    <span style="color: var(--text-dim);">[KZ]</span> Бұл жоба ресми емес және тек көмекші құрал ретінде жасалған. Біз қателер үшін жауапкершілік алмаймыз.
                     <br><br>
-                    <ul style="padding-left: 20px; list-style-type: square; color: var(--text-dim);">
-                        <li>Жауаптарда <strong>қателер болуы мүмкін</strong>.</li>
-                        <li>Бұл ресми жүйе емес.</li>
-                        <li>Емтихан нәтижесіне немесе техникалық ақауларға <strong>жауап бермейміз</strong>.</li>
-                    </ul>
+                    <span style="color: var(--text-dim);">[RU]</span> Этот проект не официальный и создан только как вспомогательный инструмент. Мы не несем ответственность за ошибки.
                 </div>
 
-                <div style="margin-bottom: 15px; padding: 10px; background: rgba(239, 68, 68, 0.05); border: 1px solid var(--border); border-radius: 4px;">
-                    <strong style="color: var(--error);">class LiabilityContext {</strong>
+                <div style="margin-bottom: 15px; padding: 10px; background: rgba(59, 130, 246, 0.05); border: 1px solid var(--border); border-radius: 4px;">
+                    <strong style="color: var(--accent);">const Terms = {</strong>
                     <br><br>
                     <span style="color: var(--text-dim);">
-                        this.responsibility = <span style="color: var(--accent);">null</span>;<br>
-                        this.guarantee = <span style="color: var(--accent);">false</span>;<br>
-                        this.message = "Сайтты қолдану - өз тәуекеліңізде (Use at your own risk).";
+                        status: "Unofficial / Ресми емес",<br>
+                        guarantee: <span style="color: var(--error);">false</span>,<br>
+                        note: "Use at your own risk."
                     </span>
                     <br><br>
-                    <strong style="color: var(--error);">}</strong>
+                    <strong style="color: var(--accent);">}</strong>
                 </div>
 
                 <p style="color: var(--text-dim); font-size: 0.75rem; margin-top: 20px;">
-                    // "I UNDERSTAND" түймесін басу арқылы сіз осы шарттармен келісесіз.<br>
+                    // Click ACCEPT to continue.<br>
                 </p>
             </div>
 
             <button class="btn btn-primary" onclick="acceptPrivacy()">
-                sudo accept --confirm (Түсіндім)
+                sudo accept (Келісемін / Согласен)
             </button>
         </div>
     </div>
@@ -311,26 +307,26 @@
             <h1>&lt;DevQuiz /&gt;</h1>
             
             <div class="main-warning">
-                ⚠️ НАЗАР АУДАРЫҢЫЗ / WARNING:<br>
-                Жауаптар 100% дұрыс емес болуы мүмкін.<br>
-                Answers might be incorrect.
+                ⚠️ <span style="font-weight: bold">ЕСКЕРТУ / ВНИМАНИЕ:</span><br>
+                Жауаптарда қателер болуы мүмкін.<br>
+                В ответах могут быть ошибки.
             </div>
 
             <p>Select your stack:</p>
             
             <div style="margin-top: 20px;">
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.1s" onclick="selectSubject('python')">Python_Kz</button>
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.2s" onclick="selectSubject('db')">Database_Kz</button>
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.3s" onclick="selectSubject('python_ru')">Python_Ru</button>
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.4s" onclick="selectSubject('db_ru')">Database_Ru</button>
+                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.1s" onclick="selectSubject('python')">Python (KZ)</button>
+                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.2s" onclick="selectSubject('db')">Database (KZ)</button>
+                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.3s" onclick="selectSubject('python_ru')">Python (RU)</button>
+                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.4s" onclick="selectSubject('db_ru')">Database (RU)</button>
             </div>
 
-            </div>
+        </div>
 
         <div id="screen-variants" class="screen">
             <h2 id="lbl-subject" style="font-size: 1.2rem;">...</h2>
             <div id="list-variants" style="overflow-y: auto; flex-grow: 1; margin: 20px 0;"></div>
-            <button class="btn" onclick="goHome()">cd .. (Back)</button>
+            <button class="btn" onclick="goHome()">cd .. (Артқа / Назад)</button>
         </div>
 
         <div id="screen-quiz" class="screen">
@@ -344,7 +340,7 @@
             </div>
 
             <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">
-                <span id="lbl-progress">Question 1/10</span>
+                <span id="lbl-progress">...</span>
                 <span>Score: <span id="lbl-score" style="color: var(--accent)">0</span></span>
             </div>
 
@@ -356,7 +352,7 @@
             
             <div id="lbl-feedback" style="text-align: center; height: 20px; font-weight: bold; margin-top: 10px;"></div>
             
-            <button id="btn-next" class="btn btn-primary hidden" style="margin-top: 15px;" onclick="nextQuestion()">NEXT >></button>
+            <button id="btn-next" class="btn btn-primary hidden" style="margin-top: 15px;" onclick="nextQuestion()">NEXT (Келесі / Далее) >></button>
         </div>
 
         <div id="screen-result" class="screen">
@@ -365,19 +361,19 @@
             <div class="score-display" id="lbl-result-pct">0%</div>
             
             <p style="font-size: 1.1rem; margin-bottom: 10px;">
-                Correct: <span id="lbl-result-count" style="color: var(--success); font-weight: bold;">0</span> / <span id="lbl-total">0</span>
+                Result: <span id="lbl-result-count" style="color: var(--success); font-weight: bold;">0</span> / <span id="lbl-total">0</span>
             </p>
             
             <h3 style="text-align: left; font-size: 1rem; color: var(--text-main); margin-bottom: 10px; padding-left: 5px;">
-                Review: 
+                Review (Қателер / Ошибки): 
             </h3>
             <div id="review-container">
-                <p style="text-align: center; color: var(--text-dim);">Тек қате жауаптар көрсетіледі...</p>
+                <p style="text-align: center; color: var(--text-dim);">...</p>
             </div>
             
             <div style="margin-top: auto; padding-top: 20px;">
-                <button class="btn btn-primary" onclick="restartQuiz()">sudo reboot (Retry)</button>
-                <button class="btn" onclick="quitQuiz()">cd /home (Menu)</button>
+                <button class="btn btn-primary" onclick="restartQuiz()">sudo reboot (Қайталау / Заново)</button>
+                <button class="btn" onclick="quitQuiz()">cd /home (Мәзір / Меню)</button>
             </div>
         </div>
 
@@ -433,7 +429,12 @@
             }
             currentSubject = subj;
             
-            const titles = { 'python': 'PYTHON_KZ', 'db': 'DATABASE_KZ', 'python_ru': 'PYTHON_RU', 'db_ru': 'DATABASE_RU' };
+            const titles = { 
+                'python': 'PYTHON (KZ)', 
+                'db': 'DATABASE (KZ)', 
+                'python_ru': 'PYTHON (RU)', 
+                'db_ru': 'DATABASE (RU)' 
+            };
             document.getElementById('lbl-subject').innerText = titles[subj] || subj.toUpperCase();
 
             const list = document.getElementById('list-variants');
@@ -444,6 +445,7 @@
                 btn.className = 'btn';
                 btn.style.animation = `fadeInUp 0.3s ease backwards ${i * 0.05}s`;
                 
+                // Bilingual text for variants is tricky without knowing data, so we keep simple
                 btn.innerText = `[FILE] Variant_${i + 1}`;
                 btn.onclick = () => startQuiz(key);
                 list.appendChild(btn);
@@ -465,7 +467,9 @@
             isAnswered = false;
             const q = questions[qIndex];
             
-            document.getElementById('lbl-progress').innerText = `Line ${qIndex + 1} of ${questions.length}`;
+            // Bilingual progress text
+            document.getElementById('lbl-progress').innerText = `Q ${qIndex + 1} / ${questions.length}`;
+            
             document.getElementById('lbl-score').innerText = score;
             document.getElementById('lbl-question').innerText = q.q;
             document.getElementById('lbl-feedback').innerText = "";
@@ -489,7 +493,7 @@
             startTimer();
         }
 
-        // --- ТАЙМЕР ---
+        // --- TIMER ---
         function startTimer() {
             clearInterval(timer);
             timeLeft = TIME_LIMIT_SECONDS;
@@ -519,7 +523,7 @@
         function timeIsUp() {
             if(isAnswered) return;
             isAnswered = true;
-            document.getElementById('lbl-feedback').innerText = "TIMEOUT ERROR";
+            document.getElementById('lbl-feedback').innerText = "TIMEOUT";
             document.getElementById('lbl-feedback').style.color = "var(--error)";
             
             saveAnswer(-1); 
@@ -539,12 +543,12 @@
             if(isCorrect) {
                 score++;
                 btn.classList.add('correct');
-                document.getElementById('lbl-feedback').innerText = "SUCCESS";
+                document.getElementById('lbl-feedback').innerText = "OK / Дұрыс";
                 document.getElementById('lbl-feedback').style.color = "var(--success)";
             } else {
                 btn.classList.add('wrong');
                 highlightCorrect();
-                document.getElementById('lbl-feedback').innerText = "FAILED";
+                document.getElementById('lbl-feedback').innerText = "ERROR / Қате";
                 document.getElementById('lbl-feedback').style.color = "var(--error)";
             }
             
@@ -599,7 +603,7 @@
             const wrongAnswers = userAnswers.filter(a => !a.isCorrect);
 
             if (wrongAnswers.length === 0) {
-                 container.innerHTML = '<p style="color: var(--success); text-align: center;">Барлық жауап дұрыс! Great job!</p>';
+                 container.innerHTML = '<p style="color: var(--success); text-align: center;">100% Correct! / Барлығы дұрыс!</p>';
                  return;
             }
             
@@ -611,23 +615,23 @@
                 
                 item.innerHTML += `
                     <div>
-                        <span class="review-label">Дұрыс:</span> 
+                        <span class="review-label">Correct (Дұрыс):</span> 
                         <span class="review-correct">${a.options[a.correctIndex]}</span>
                     </div>
                 `;
                 
                 let userChoiceText;
                 if (a.isTimeout) {
-                    userChoiceText = 'Жауап берілмеді (TIMEOUT)';
+                    userChoiceText = 'TIMEOUT (Уақыт бітті)';
                 } else if (a.selectedIndex >= 0) {
                     userChoiceText = a.options[a.selectedIndex];
                 } else {
-                    userChoiceText = 'Мәлімет жоқ';
+                    userChoiceText = 'N/A';
                 }
 
                 item.innerHTML += `
                     <div>
-                        <span class="review-label">Сенің:</span> 
+                        <span class="review-label">You (Сен):</span> 
                         <span class="review-wrong">${userChoiceText}</span>
                     </div>
                 `;
