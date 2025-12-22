@@ -145,7 +145,7 @@ const database = {
             {
                 q: "SQLite файлы көбіне қандай кеңейтілімге ие?",
                 options: [".db", ".sql", ".base", ".sq", ".sqlite3"],
-                correct: 0
+                correct: 4
             },
             {
                 q: "SQL-де кестені қалай жасаймыз?",
@@ -523,7 +523,7 @@ const database = {
             {
                 q: "Бір шарт бойынша бір жазбаны қалай таңдаймыз?",
                 options: ["SELECT ONE", "SELECT ROW WHERE", "SELECT * WHERE", "SELECT FROM WHERE", "SELECT WHERE ROW"],
-                correct: 3
+                correct: 2
             },
             {
                 q: "ORDER BY операторы не істейді?",
@@ -737,7 +737,7 @@ const database = {
             {
                 q: "cursor-дан баған атауларын қалай аламыз?",
                 options: ["cursor.columns", "cursor.keys()", "cursor.fields()", "cursor.meta()", "cursor.colnames()"],
-                correct: 4
+                correct: 1
             },
             {
                 q: "SELECT * FROM table сұранысындағы * нені білдіреді?",
@@ -877,6 +877,7 @@ const database = {
                 q: "Параметрсіз lambda-функцияны таңдаңыз:",
                 options: ["lambda(): 5", "lambda 5", "lambda → 5", "lambda: 5", "lambda(None)"],
                 correct: 3
+                correct: 0
             },
             {
                 q: "Математикалық функциялар беретін модуль?",
@@ -1105,7 +1106,7 @@ const database = {
             {
                 q: "Объект атрибуттарының сөздігін қай әдіс қайтарады?",
                 options: ["attrs()", "getinfo()", "properties()", "dict", "vars()"],
-                correct: 4
+                correct: 3
             },
             {
                 q: "json.dumps() не істейді?",
@@ -1299,7 +1300,7 @@ const database = {
             {
                 q: "Жаңа файлды құру режимі?",
                 options: ["'r'", "'x'", "'w'", "'rw'", "'rw+'"],
-                correct: 1
+                correct: 2
             },
             {
                 q: "Файлдың барлығын бірден оқитын функция?",
@@ -1513,7 +1514,7 @@ const database = {
             {
                 q: "Объектінің клас атауын қалай аламыз?",
                 options: ["type(obj).title", "obj.class.name", "class(obj).name", "typename(obj)", "obj.name"],
-                correct: 3
+                correct: 1
             },
             {
                 q: "json.loads() не істейді?",
@@ -1682,7 +1683,7 @@ const database = {
             {
                 q: "Қай цикл бастапқы шарт жалған болса, бір де бір рет орындалмайды?",
                 options: ["for", "while", "until", "repeat", "loop"],
-                correct: 1
+                correct: 0
             },
             {
                 q: "Тізімнен мәнді іздеп, индексін қайтаратын әдіс?",
