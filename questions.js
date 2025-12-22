@@ -876,7 +876,6 @@ const database = {
             {
                 q: "Параметрсіз lambda-функцияны таңдаңыз:",
                 options: ["lambda(): 5", "lambda 5", "lambda → 5", "lambda: 5", "lambda(None)"],
-                correct: 3
                 correct: 0
             },
             {
