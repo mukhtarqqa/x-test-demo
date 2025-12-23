@@ -11,15 +11,14 @@
 
     <style>
         :root {
-            /* Бастапқы түстерге қайту */
             --bg-color: #0f172a;       
             --card-bg: #1e293b;        
-            --accent: #3b82f6;         /* Blue styling */
+            --accent: #3b82f6;         
             --text-main: #e2e8f0;      
             --text-dim: #94a3b8;       
             --success: #10b981;        
             --error: #ef4444;          
-            --warning: #f59e0b;        /* Yellow for disclaimer */
+            --warning: #f59e0b;        
             --border: #334155;         
         }
 
@@ -45,51 +44,44 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.98);
             z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease;
+            backdrop-filter: blur(10px);
         }
 
         .privacy-box {
             background: var(--card-bg);
-            border: 1px solid var(--accent); /* Blue border again */
+            border: 1px solid var(--accent);
             width: 85%;
             max-width: 500px;
-            max-height: 90vh;
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.2);
+            animation: fadeInUp 0.5s ease;
         }
 
         .privacy-content {
-            flex-grow: 1;
-            overflow-y: auto;
             background: var(--bg-color);
-            padding: 15px;
+            padding: 20px;
             border: 1px solid var(--border);
             font-size: 0.85rem;
             color: var(--text-dim);
-            margin-bottom: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            line-height: 1.5;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            border-radius: 6px;
         }
-        
-        .privacy-content::-webkit-scrollbar { width: 8px; }
-        .privacy-content::-webkit-scrollbar-track { background: var(--bg-color); }
-        .privacy-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
         /* --- CONTAINER --- */
         .container {
             background: var(--card-bg);
             width: 90%;
             max-width: 500px;
-            min-height: 450px;
+            min-height: 500px;
             border-radius: 12px;
             border: 1px solid var(--border);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
@@ -97,7 +89,6 @@
             flex-direction: column;
             padding: 2rem;
             position: relative;
-            overflow: hidden;
             z-index: 1;
         }
 
@@ -106,25 +97,9 @@
             color: var(--accent);
             margin-top: 0;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
-        p { text-align: center; color: var(--text-dim); font-size: 0.9rem; }
-
-        /* WARNING BANNER ON MAIN PAGE */
-        .main-warning {
-            background: rgba(245, 158, 11, 0.1); /* Yellow tint, not red */
-            border: 1px dashed var(--warning);
-            color: var(--warning);
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 0.8rem;
-            text-align: center;
-            font-weight: normal;
-        }
-
-        /* --- BUTTONS --- */
         .btn {
             background: transparent;
             border: 1px solid var(--border);
@@ -139,19 +114,12 @@
             text-align: left;
             transition: all 0.2s;
             position: relative;
-            overflow: hidden;
         }
 
         .btn:hover {
             border-color: var(--accent);
             background: rgba(59, 130, 246, 0.1);
             padding-left: 20px;
-        }
-        .btn:hover::before {
-            content: ">";
-            position: absolute;
-            left: 8px;
-            color: var(--accent);
         }
 
         .btn-primary {
@@ -161,11 +129,6 @@
             text-align: center;
             font-weight: bold;
         }
-        .btn-primary:hover {
-            background: #2563eb;
-            padding-left: 15px;
-        }
-        .btn-primary:hover::before { content: ""; }
 
         .option-btn {
             background: #0f172a;
@@ -178,226 +141,104 @@
             color: var(--text-main);
             cursor: pointer;
             font-family: inherit;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-        }
-        .option-btn:hover:not([disabled]) {
-            border-color: var(--text-dim);
-            background: #1e293b;
+            transition: 0.2s;
         }
 
         .correct { border-color: var(--success) !important; background: rgba(16, 185, 129, 0.1) !important; color: var(--success); }
         .wrong { border-color: var(--error) !important; background: rgba(239, 68, 68, 0.1) !important; color: var(--error); }
 
-        /* --- TIMER & UTILS --- */
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .timer-box {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-            background: #0f172a;
-            padding: 5px 12px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .timer-icon { animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-        
-        .timer-warning { color: var(--error); border-color: var(--error); animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        .btn-exit {
-            background: none;
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-family: inherit;
-        }
-        .btn-exit:hover { background: var(--error); color: white; }
-
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeScreen { from { opacity: 0; } to { opacity: 1; } }
-
         .screen { display: none; height: 100%; flex-direction: column; }
         .screen.active { display: flex; animation: fadeScreen 0.3s ease; }
         .hidden { display: none !important; }
-        
-        .score-display { font-size: 4rem; font-weight: bold; color: var(--accent); margin: 20px 0; text-align: center; }
 
-        #review-container {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            text-align: left;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .review-item {
-            background: #0f172a;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid var(--border);
-        }
-        .review-q { font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
-        .review-correct { color: var(--success); }
-        .review-wrong { color: var(--error); }
-        .review-label { font-size: 0.85rem; color: var(--text-dim); margin-right: 10px; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeScreen { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Timer UI */
+        .timer-box { font-weight: bold; background: #0f172a; padding: 5px 12px; border-radius: 4px; border: 1px solid var(--border); }
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
     <div id="privacy-overlay">
         <div class="privacy-box">
+            <h3 style="color: var(--accent); margin-top: 0; border-bottom: 1px dashed var(--border); padding-bottom: 10px; text-align: center;">
+                # SYSTEM_INFO.md
+            </h3>
+            
             <div class="privacy-content">
-                <h3 style="color: var(--accent); margin-top: 0; border-bottom: 1px dashed var(--border); padding-bottom: 10px;">
-                    # DISCLAIMER.md
-                </h3>
-
-                <div style="margin-bottom: 20px;">
-                    <strong style="color: var(--text-main);">// PLEASE READ / ОҚЫҢЫЗ</strong>
-                    <br><br>
-                    <span style="color: var(--text-dim);">[KZ]</span> Бұл жоба ресми емес және тек көмекші құрал ретінде жасалған. Біз қателер үшін жауапкершілік алмаймыз.
-                    <br><br>
-                    <span style="color: var(--text-dim);">[RU]</span> Этот проект не официальный и создан только как вспомогательный инструмент. Мы не несем ответственность за ошибки.
-                </div>
-
-                <div style="margin-bottom: 15px; padding: 10px; background: rgba(59, 130, 246, 0.05); border: 1px solid var(--border); border-radius: 4px;">
-                    <strong style="color: var(--accent);">const Terms = {</strong>
-                    <br><br>
-                    <span style="color: var(--text-dim);">
-                        status: "Unofficial / Ресми емес",<br>
-                        guarantee: <span style="color: var(--error);">false</span>,<br>
-                        note: "Use at your own risk."
+                <div style="margin-bottom: 15px;">
+                    <strong style="color: var(--success);">[UPDATE / ЖАҢАРТУ]:</strong><br>
+                    <span style="color: var(--text-main);">
+                        В русских версиях исправлены ответы на те, что нашли с листа ответов. Надеюсь, это поможет вам!
                     </span>
                     <br><br>
-                    <strong style="color: var(--accent);">}</strong>
+                    <span style="color: var(--text-dim); font-size: 0.8rem;">
+                        Орыс тіліндегі нұсқаларда жауаптар жауап парақтары бойынша түзетілді. Сәттілік!
+                    </span>
                 </div>
 
-                <p style="color: var(--text-dim); font-size: 0.75rem; margin-top: 20px;">
-                    // Click ACCEPT to continue.<br>
-                </p>
+                <div style="border-top: 1px solid var(--border); padding-top: 10px;">
+                    <strong style="color: var(--warning);">// Disclaimer:</strong><br>
+                    Бұл ресми бағдарлама емес. Қателер болуы мүмкін.
+                </div>
             </div>
 
             <button class="btn btn-primary" onclick="acceptPrivacy()">
-                sudo accept (Келісемін / Согласен)
+                sudo start (Кіру / Войти)
             </button>
         </div>
     </div>
 
     <div class="container">
-        
         <div id="screen-menu" class="screen active">
             <h1>&lt;DevQuiz /&gt;</h1>
-            
-            <div class="main-warning">
-                ⚠️ <span style="font-weight: bold">ЕСКЕРТУ / ВНИМАНИЕ:</span><br>
-                Жауаптарда қателер болуы мүмкін.<br>
-                В ответах могут быть ошибки.
-            </div>
-
-            <p>Select your stack:</p>
+            <p style="text-align: center; color: var(--text-dim);">Пәнді таңдаңыз:</p>
             
             <div style="margin-top: 20px;">
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.1s" onclick="selectSubject('python')">Python (KZ)</button>
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.2s" onclick="selectSubject('db')">Database (KZ)</button>
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.3s" onclick="selectSubject('python_ru')">Python (RU)</button>
-                <button class="btn" style="animation: fadeInUp 0.3s ease backwards 0.4s" onclick="selectSubject('db_ru')">Database (RU)</button>
+                <button class="btn" onclick="selectSubject('python')">Python (KZ)</button>
+                <button class="btn" onclick="selectSubject('db')">Database (KZ)</button>
+                <button class="btn" onclick="selectSubject('python_ru')">Python (RU)</button>
+                <button class="btn" onclick="selectSubject('db_ru')">Database (RU)</button>
             </div>
-
         </div>
 
         <div id="screen-variants" class="screen">
             <h2 id="lbl-subject" style="font-size: 1.2rem;">...</h2>
             <div id="list-variants" style="overflow-y: auto; flex-grow: 1; margin: 20px 0;"></div>
-            <button class="btn" onclick="goHome()">cd .. (Артқа / Назад)</button>
+            <button class="btn" onclick="goHome()">cd .. (Артқа)</button>
         </div>
 
         <div id="screen-quiz" class="screen">
             <div class="quiz-header">
-                <button class="btn-exit" onclick="quitQuiz()">EXIT</button>
-                
-                <div id="timer-display" class="timer-box">
-                    <span class="timer-icon">●</span> 
-                    <span id="time-text">00:00</span>
-                </div>
+                <button onclick="quitQuiz()" style="background:none; border:1px solid var(--error); color:var(--error); cursor:pointer; border-radius:4px;">EXIT</button>
+                <div id="timer-display" class="timer-box">00:20</div>
             </div>
-
-            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">
-                <span id="lbl-progress">...</span>
-                <span>Score: <span id="lbl-score" style="color: var(--accent)">0</span></span>
-            </div>
-
-            <div id="lbl-question" style="font-size: 1.1rem; margin-bottom: 20px; line-height: 1.5; min-height: 60px;">
-                Loading...
-            </div>
-            
+            <div id="lbl-question" style="font-size: 1.1rem; margin-bottom: 20px;"></div>
             <div id="box-options"></div>
-            
-            <div id="lbl-feedback" style="text-align: center; height: 20px; font-weight: bold; margin-top: 10px;"></div>
-            
-            <button id="btn-next" class="btn btn-primary hidden" style="margin-top: 15px;" onclick="nextQuestion()">NEXT (Келесі / Далее) >></button>
+            <button id="btn-next" class="btn btn-primary hidden" onclick="nextQuestion()">Келесі >></button>
         </div>
 
         <div id="screen-result" class="screen">
-            <h2>System.out</h2>
-            
-            <div class="score-display" id="lbl-result-pct">0%</div>
-            
-            <p style="font-size: 1.1rem; margin-bottom: 10px;">
-                Result: <span id="lbl-result-count" style="color: var(--success); font-weight: bold;">0</span> / <span id="lbl-total">0</span>
-            </p>
-            
-            <h3 style="text-align: left; font-size: 1rem; color: var(--text-main); margin-bottom: 10px; padding-left: 5px;">
-                Review (Қателер / Ошибки): 
-            </h3>
-            <div id="review-container">
-                <p style="text-align: center; color: var(--text-dim);">...</p>
-            </div>
-            
-            <div style="margin-top: auto; padding-top: 20px;">
-                <button class="btn btn-primary" onclick="restartQuiz()">sudo reboot (Қайталау / Заново)</button>
-                <button class="btn" onclick="quitQuiz()">cd /home (Мәзір / Меню)</button>
-            </div>
+            <h2>Result</h2>
+            <div id="lbl-result-pct" style="font-size: 3rem; text-align: center; color: var(--accent); margin: 20px 0;">0%</div>
+            <button class="btn btn-primary" onclick="restartQuiz()">Қайталау</button>
+            <button class="btn" onclick="goHome()">Мәзірге</button>
         </div>
-
     </div>
 
     <script>
-        // --- CONFIG ---
-        const TIME_LIMIT_SECONDS = 20;
-
-        // --- STATE ---
         let currentSubject = '';
         let questions = [];
         let qIndex = 0;
         let score = 0;
         let timer = null;
-        let timeLeft = 0;
+        let timeLeft = 20;
         let isAnswered = false;
-        let userAnswers = [];
 
-        // --- UTILS ---
-        function formatTime(seconds) {
-            const m = Math.floor(seconds / 60);
-            const s = seconds % 60;
-            return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+        function acceptPrivacy() {
+            document.getElementById('privacy-overlay').style.display = 'none';
         }
 
         function showScreen(id) {
@@ -405,60 +246,28 @@
             document.getElementById(id).classList.add('active');
         }
 
-        function goHome() { showScreen('screen-menu'); clearInterval(timer); }
-        
-        function quitQuiz() {
-            clearInterval(timer);
-            goHome();
-        }
-
-        // --- PRIVACY LOGIC ---
-        function acceptPrivacy() {
-            const overlay = document.getElementById('privacy-overlay');
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 500);
-        }
-
-        // --- LOGIC ---
         function selectSubject(subj) {
-            if (typeof database === 'undefined' || !database[subj]) {
-                alert("Error 404: Questions not found in database (questions.js).");
+            if (!window.database || !window.database[subj]) {
+                alert("Database Error!");
                 return;
             }
             currentSubject = subj;
-            
-            const titles = { 
-                'python': 'PYTHON (KZ)', 
-                'db': 'DATABASE (KZ)', 
-                'python_ru': 'PYTHON (RU)', 
-                'db_ru': 'DATABASE (RU)' 
-            };
-            document.getElementById('lbl-subject').innerText = titles[subj] || subj.toUpperCase();
-
             const list = document.getElementById('list-variants');
             list.innerHTML = '';
-
-            Object.keys(database[subj]).forEach((key, i) => {
+            Object.keys(window.database[subj]).forEach((key, i) => {
                 const btn = document.createElement('button');
                 btn.className = 'btn';
-                btn.style.animation = `fadeInUp 0.3s ease backwards ${i * 0.05}s`;
-                
-                // Bilingual text for variants is tricky without knowing data, so we keep simple
-                btn.innerText = `[FILE] Variant_${i + 1}`;
+                btn.innerText = `Variant ${i + 1}`;
                 btn.onclick = () => startQuiz(key);
                 list.appendChild(btn);
             });
-
             showScreen('screen-variants');
         }
 
         function startQuiz(key) {
-            questions = database[currentSubject][key];
+            questions = window.database[currentSubject][key];
             qIndex = 0;
             score = 0;
-            userAnswers = [];
             showScreen('screen-quiz');
             loadQuestion();
         }
@@ -466,187 +275,62 @@
         function loadQuestion() {
             isAnswered = false;
             const q = questions[qIndex];
-            
-            // Bilingual progress text
-            document.getElementById('lbl-progress').innerText = `Q ${qIndex + 1} / ${questions.length}`;
-            
-            document.getElementById('lbl-score').innerText = score;
             document.getElementById('lbl-question').innerText = q.q;
-            document.getElementById('lbl-feedback').innerText = "";
             document.getElementById('btn-next').classList.add('hidden');
-            
-            const timerBox = document.getElementById('timer-display');
-            timerBox.classList.remove('timer-warning');
-
             const box = document.getElementById('box-options');
             box.innerHTML = '';
             
             q.options.forEach((opt, i) => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
-                btn.innerText = `> ${opt}`;
-                btn.style.animation = `fadeInUp 0.3s ease backwards ${i * 0.08}s`;
+                btn.innerText = opt;
                 btn.onclick = () => checkAnswer(i, btn);
                 box.appendChild(btn);
             });
-
             startTimer();
         }
 
-        // --- TIMER ---
         function startTimer() {
             clearInterval(timer);
-            timeLeft = TIME_LIMIT_SECONDS;
-            updateTimeDisplay();
-            
+            timeLeft = 20;
+            document.getElementById('timer-display').innerText = `00:${timeLeft}`;
             timer = setInterval(() => {
                 timeLeft--;
-                updateTimeDisplay();
-                if (timeLeft <= 0) {
+                document.getElementById('timer-display').innerText = `00:${timeLeft < 10 ? '0'+timeLeft : timeLeft}`;
+                if(timeLeft <= 0) {
                     clearInterval(timer);
-                    timeIsUp();
+                    if(!isAnswered) nextQuestion();
                 }
             }, 1000);
         }
 
-        function updateTimeDisplay() {
-            document.getElementById('time-text').innerText = formatTime(timeLeft);
-            
-            const timerBox = document.getElementById('timer-display');
-            if(timeLeft <= 5) {
-                timerBox.classList.add('timer-warning');
-            } else {
-                 timerBox.classList.remove('timer-warning');
-            }
-        }
-
-        function timeIsUp() {
-            if(isAnswered) return;
-            isAnswered = true;
-            document.getElementById('lbl-feedback').innerText = "TIMEOUT";
-            document.getElementById('lbl-feedback').style.color = "var(--error)";
-            
-            saveAnswer(-1); 
-            blockAll();
-            highlightCorrect();
-            document.getElementById('btn-next').classList.remove('hidden');
-        }
-
-        function checkAnswer(selectedIndex, btn) {
+        function checkAnswer(idx, btn) {
             if(isAnswered) return;
             isAnswered = true;
             clearInterval(timer);
-            
-            const correctIdx = questions[qIndex].correct;
-            const isCorrect = selectedIndex === correctIdx;
-            
-            if(isCorrect) {
+            const correct = questions[qIndex].correct;
+            if(idx === correct) {
                 score++;
                 btn.classList.add('correct');
-                document.getElementById('lbl-feedback').innerText = "OK / Дұрыс";
-                document.getElementById('lbl-feedback').style.color = "var(--success)";
             } else {
                 btn.classList.add('wrong');
-                highlightCorrect();
-                document.getElementById('lbl-feedback').innerText = "ERROR / Қате";
-                document.getElementById('lbl-feedback').style.color = "var(--error)";
+                document.querySelectorAll('.option-btn')[correct].classList.add('correct');
             }
-            
-            saveAnswer(selectedIndex, isCorrect);
-            document.getElementById('lbl-score').innerText = score;
-            blockAll();
             document.getElementById('btn-next').classList.remove('hidden');
-        }
-        
-        function saveAnswer(selectedIndex, isCorrect = false) {
-             const q = questions[qIndex];
-             userAnswers.push({
-                 qIndex: qIndex,
-                 question: q.q,
-                 options: q.options,
-                 correctIndex: q.correct,
-                 selectedIndex: selectedIndex,
-                 isCorrect: isCorrect,
-                 isTimeout: selectedIndex === -1
-             });
-        }
-
-        function highlightCorrect() {
-            const correctIdx = questions[qIndex].correct;
-            const btns = document.querySelectorAll('.option-btn');
-            btns[correctIdx].classList.add('correct');
-        }
-
-        function blockAll() {
-            document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
         }
 
         function nextQuestion() {
             qIndex++;
             if(qIndex < questions.length) loadQuestion();
-            else showResult();
-        }
-
-        function showResult() {
-            showScreen('screen-result');
-            const pct = Math.round((score / questions.length) * 100);
-            document.getElementById('lbl-result-pct').innerText = pct + '%';
-            document.getElementById('lbl-result-count').innerText = score;
-            document.getElementById('lbl-total').innerText = questions.length;
-            renderReview();
-        }
-
-        function renderReview() {
-            const container = document.getElementById('review-container');
-            container.innerHTML = '';
-            
-            const wrongAnswers = userAnswers.filter(a => !a.isCorrect);
-
-            if (wrongAnswers.length === 0) {
-                 container.innerHTML = '<p style="color: var(--success); text-align: center;">100% Correct! / Барлығы дұрыс!</p>';
-                 return;
+            else {
+                showScreen('screen-result');
+                document.getElementById('lbl-result-pct').innerText = Math.round((score/questions.length)*100) + '%';
             }
-            
-            wrongAnswers.forEach(a => {
-                const item = document.createElement('div');
-                item.className = 'review-item';
-                
-                item.innerHTML += `<div class="review-q">Q${a.qIndex + 1}: ${a.question}</div>`;
-                
-                item.innerHTML += `
-                    <div>
-                        <span class="review-label">Correct (Дұрыс):</span> 
-                        <span class="review-correct">${a.options[a.correctIndex]}</span>
-                    </div>
-                `;
-                
-                let userChoiceText;
-                if (a.isTimeout) {
-                    userChoiceText = 'TIMEOUT (Уақыт бітті)';
-                } else if (a.selectedIndex >= 0) {
-                    userChoiceText = a.options[a.selectedIndex];
-                } else {
-                    userChoiceText = 'N/A';
-                }
-
-                item.innerHTML += `
-                    <div>
-                        <span class="review-label">You (Сен):</span> 
-                        <span class="review-wrong">${userChoiceText}</span>
-                    </div>
-                `;
-                
-                container.appendChild(item);
-            });
         }
 
-        function restartQuiz() {
-            qIndex = 0;
-            score = 0;
-            userAnswers = [];
-            showScreen('screen-quiz');
-            loadQuestion();
-        }
+        function goHome() { showScreen('screen-menu'); }
+        function quitQuiz() { clearInterval(timer); goHome(); }
+        function restartQuiz() { qIndex = 0; score = 0; loadQuestion(); showScreen('screen-quiz'); }
     </script>
 </body>
 </html>
