@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Exam System - Holiday Edition</title>
+    <title>IT Exam System - New Year 2026</title>
     
     <script src="questions.js"></script>
     
@@ -13,162 +13,181 @@
         :root {
             --bg-color: #0f172a;        
             --card-bg: #1e293b;        
-            --accent: #3b82f6;          /* Blue styling */
+            --accent: #3b82f6;
             --text-main: #e2e8f0;      
             --text-dim: #94a3b8;        
             --success: #10b981;        
             --error: #ef4444;           
-            --warning: #f59e0b;        
             --border: #334155;          
-            --gold: #fbbf24;            /* New color for holidays */
+            --gold: #fbbf24;            
+            --holiday-grad: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
         }
 
         body {
             font-family: 'JetBrains Mono', monospace;
             background-color: var(--bg-color);
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
             color: var(--text-main);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow: hidden; /* For snow containment */
         }
 
-        /* --- PRIVACY MODAL --- */
+        /* --- SNOW EFFECT --- */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0.3; }
+        }
+
+        /* --- MODAL (GREETING CARD) --- */
         #privacy-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.9);
             z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.5s ease;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.8s ease;
         }
 
         .privacy-box {
-            background: var(--card-bg);
-            border: 1px solid var(--gold); /* Gold border for holidays */
+            background: rgba(30, 41, 59, 0.95);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
             width: 85%;
-            max-width: 500px;
-            max-height: 90vh;
-            border-radius: 12px;
-            padding: 20px;
+            max-width: 480px;
+            border-radius: 20px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 40px rgba(251, 191, 36, 0.15);
-        }
-
-        .privacy-content {
-            flex-grow: 1;
-            overflow-y: auto;
-            background: var(--bg-color);
-            padding: 20px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            margin-bottom: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            line-height: 1.6;
+            box-shadow: 0 0 50px rgba(251, 191, 36, 0.2);
             text-align: center;
         }
-        
-        .privacy-content::-webkit-scrollbar { width: 8px; }
-        .privacy-content::-webkit-scrollbar-track { background: var(--bg-color); }
-        .privacy-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-        a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed var(--accent); }
-        a:hover { color: #60a5fa; border-bottom-style: solid; }
-
-        /* --- CONTAINER --- */
-        .container {
-            background: var(--card-bg);
-            width: 90%;
-            max-width: 500px;
-            min-height: 450px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
+        /* Gold Border Gradient */
+        .privacy-box::before {
+            content: '';
+            position: absolute;
+            top: -2px; bottom: -2px;
+            left: -2px; right: -2px;
+            background: var(--holiday-grad);
+            z-index: -1;
+            border-radius: 22px;
         }
 
-        h1, h2 {
-            text-align: center;
-            color: var(--accent);
-            margin-top: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        p { text-align: center; color: var(--text-dim); font-size: 0.9rem; }
-
-        /* --- BUTTONS --- */
-        .btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-dim); /* Dimmed text since disabled */
-            padding: 15px;
-            border-radius: 6px;
-            cursor: not-allowed; /* Changed cursor */
-            font-family: inherit;
-            font-size: 0.95rem;
-            width: 100%;
-            margin-bottom: 10px;
-            text-align: left;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
-            opacity: 0.7;
-        }
-
-        /* Hover effect changed for disabled feel */
-        .btn:hover {
-            border-color: var(--border);
-            background: rgba(255, 255, 255, 0.02);
-            padding-left: 15px;
-        }
-
-        .btn-primary {
-            background: var(--success); /* Green for positive vibes */
-            border-color: var(--success);
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            opacity: 1;
-        }
-        .btn-primary:hover {
-            background: #059669;
-            padding-left: 15px; /* Reset padding shift */
-        }
-
-        /* --- UTILS --- */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeScreen { from { opacity: 0; } to { opacity: 1; } }
-
-        .screen { display: none; height: 100%; flex-direction: column; }
-        .screen.active { display: flex; animation: fadeScreen 0.3s ease; }
-        
-        .holiday-text {
-            background: linear-gradient(to right, #fbbf24, #f59e0b);
+        .modal-header {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: var(--holiday-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bold;
+            text-shadow: 0 2px 10px rgba(251, 191, 36, 0.3);
         }
+
+        .message-block {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .highlight { color: var(--gold); font-weight: bold; }
+        
+        a { 
+            color: var(--accent); 
+            text-decoration: none; 
+            border-bottom: 1px dashed var(--accent); 
+            transition: all 0.3s;
+        }
+        a:hover { color: #fff; background: var(--accent); border-bottom: none; padding: 0 4px; border-radius: 4px; }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 450px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        h1 { color: var(--text-main); font-size: 1.5rem; margin-bottom: 5px; }
+        
+        .status-badge {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            border: 1px solid var(--error);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .btn-locked {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            padding: 16px;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 12px;
+            text-align: left;
+            font-family: inherit;
+            cursor: not-allowed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .btn-locked:hover { background: rgba(15, 23, 42, 0.9); border-color: var(--error); }
+
+        .btn-primary {
+            background: var(--holiday-grad);
+            border: none;
+            color: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
     </style>
 </head>
@@ -176,91 +195,98 @@
 
     <div id="privacy-overlay">
         <div class="privacy-box">
-            <div class="privacy-content">
-                
-                <h2 style="color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 20px;">
-                    🎉 2025 🎄
-                </h2>
-
-                <div style="margin-bottom: 25px;">
-                    <strong style="color: var(--text-main); font-size: 1.1em;">
-                        [KZ] Құттықтаймын!
-                    </strong>
-                    <br><br>
-                    Емтихандардың аяқталуымен құттықтаймын! <br>
-                    Келе жатқан Жаңа жылыңызбен! ❄️
-                    <br><br>
-                    Емтиханнан қанша балл алғаныңызды маған жазыңыз: 
-                    <br>
-                    <a href="https://t.me/akanaa0" target="_blank">@akanaa0</a>
-                </div>
-
-                <div style="border-top: 1px dashed var(--border); padding-top: 20px;">
-                    <strong style="color: var(--text-main); font-size: 1.1em;">
-                        [RU] Поздравляю!
-                    </strong>
-                    <br><br>
-                    Поздравляю с окончанием экзаменов! <br>
-                    С наступающим Новым годом! ❄️
-                    <br><br>
-                    Напишите, сколько получили по экзамену:
-                    <br>
-                    <a href="https://t.me/akanaa0" target="_blank">@akanaa0</a>
-                </div>
-
+            <div class="modal-header">
+                ✨ 2026 ✨
             </div>
 
-            <button class="btn btn-primary" onclick="acceptPrivacy()">
-                Raxmet! / Спасибо! (Close)
+            <div class="message-block">
+                <p style="margin-top: 0;">
+                    <span class="highlight">[KZ] Құттықтаймын! 🥂</span><br>
+                    Барлық емтихандар сәтті аяқталды! Жаңа 2026 жылыңыз құтты болсын!
+                </p>
+                <hr style="border: 0; border-top: 1px dashed var(--border); margin: 15px 0;">
+                <p style="margin-bottom: 0;">
+                    <span class="highlight">[RU] Поздравляю! 🥂</span><br>
+                    Все экзамены успешно завершены! С Новым 2026 годом!
+                </p>
+            </div>
+
+            <div style="font-size: 0.9rem; margin-bottom: 20px; color: var(--text-dim);">
+                Емтихан нәтижесін (балл) маған жазыңыз / <br>Напишите свой результат:
+                <br><br>
+                👉 <a href="https://t.me/akanaa0" target="_blank">@akanaa0</a>
+            </div>
+
+            <button class="btn-primary" onclick="closeModal()">
+                Рахмет! / Спасибо! 🎄
             </button>
         </div>
     </div>
 
     <div class="container">
+        <h1>&lt;DevQuiz /&gt;</h1>
+        <div class="status-badge">SESSION CLOSED</div>
         
-        <div id="screen-menu" class="screen active">
-            <h1>&lt;DevQuiz /&gt;</h1>
-            
-            <p style="margin-bottom: 30px;">
-                <span class="holiday-text">HAPPY NEW YEAR!</span>
-            </p>
+        <p style="color: var(--gold); margin-bottom: 30px; font-weight: 500;">
+            Happy New Year 2026! 🐍
+        </p>
 
-            <div style="margin-top: 20px;">
-                <button class="btn" onclick="selectSubject('python')">🔒 Python (KZ) - [CLOSED]</button>
-                <button class="btn" onclick="selectSubject('db')">🔒 Database (KZ) - [CLOSED]</button>
-                <button class="btn" onclick="selectSubject('python_ru')">🔒 Python (RU) - [CLOSED]</button>
-                <button class="btn" onclick="selectSubject('db_ru')">🔒 Database (RU) - [CLOSED]</button>
-            </div>
-
-            <p style="margin-top: auto; font-size: 0.8rem; opacity: 0.5;">
-                System status: Holiday Mode ⛄
-            </p>
-
+        <div>
+            <button class="btn-locked" onclick="holidayAlert()">
+                <span>Python (KZ)</span> <span>🔒</span>
+            </button>
+            <button class="btn-locked" onclick="holidayAlert()">
+                <span>Database (KZ)</span> <span>🔒</span>
+            </button>
+            <button class="btn-locked" onclick="holidayAlert()">
+                <span>Python (RU)</span> <span>🔒</span>
+            </button>
+            <button class="btn-locked" onclick="holidayAlert()">
+                <span>Database (RU)</span> <span>🔒</span>
+            </button>
         </div>
 
+        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.5;">
+            See you next semester! <br>
+            ❄️ ❄️ ❄️
+        </p>
     </div>
 
     <script>
-        // --- PRIVACY LOGIC ---
-        function acceptPrivacy() {
+        // --- SNOWFALL EFFECT ---
+        function createSnow() {
+            const snowCount = 30; // Number of snowflakes
+            for(let i=0; i<snowCount; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snowflake';
+                flake.innerHTML = '❄'; // You can also use • or *
+                
+                // Randomize position and animation
+                flake.style.left = Math.random() * 100 + 'vw';
+                flake.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5 seconds
+                flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                flake.style.opacity = Math.random();
+                
+                document.body.appendChild(flake);
+            }
+        }
+
+        // --- INTERACTION ---
+        function closeModal() {
             const overlay = document.getElementById('privacy-overlay');
             overlay.style.opacity = '0';
+            overlay.style.transition = 'opacity 0.5s';
             setTimeout(() => {
                 overlay.style.display = 'none';
             }, 500);
         }
 
-        // --- LOGIC (DISABLED) ---
-        function selectSubject(subj) {
-            // Functionality disabled as per request
-            // Вместо открытия разделов показываем сообщение
-            alert(
-                "🎄 [KZ] Емтихандар бітті! Жаңа жыл құтты болсын!\n" +
-                "🎅 [RU] Экзамены окончены! С Новым годом!"
-            );
+        function holidayAlert() {
+            alert("🎅 Ho-ho-ho!\n\n[KZ] Емтихандар бітті, демалыңыз!\n[RU] Экзамены всё, отдыхайте!");
         }
 
-        // Other quiz functions removed or unused since the quiz cannot be started.
+        // Init
+        window.onload = createSnow;
     </script>
 </body>
 </html>
