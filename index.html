@@ -33,7 +33,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* For snow containment */
+            overflow: hidden; 
         }
 
         /* --- SNOW EFFECT --- */
@@ -60,7 +60,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -84,7 +84,6 @@
             text-align: center;
         }
 
-        /* Gold Border Gradient */
         .privacy-box::before {
             content: '';
             position: absolute;
@@ -102,7 +101,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bold;
-            text-shadow: 0 2px 10px rgba(251, 191, 36, 0.3);
         }
 
         .message-block {
@@ -117,59 +115,55 @@
 
         .highlight { color: var(--gold); font-weight: bold; }
         
-        a { 
-            color: var(--accent); 
-            text-decoration: none; 
-            border-bottom: 1px dashed var(--accent); 
-            transition: all 0.3s;
-        }
+        a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed var(--accent); transition: all 0.3s; }
         a:hover { color: #fff; background: var(--accent); border-bottom: none; padding: 0 4px; border-radius: 4px; }
 
         /* --- MAIN CONTAINER --- */
         .container {
             background: var(--card-bg);
             width: 90%;
-            max-width: 450px;
+            max-width: 500px;
+            min-height: 500px;
             border-radius: 16px;
             border: 1px solid var(--border);
             box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.5);
             padding: 2rem;
             position: relative;
             z-index: 1;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 { color: var(--text-main); font-size: 1.5rem; margin-bottom: 5px; }
-        
-        .status-badge {
-            display: inline-block;
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--error);
-            border: 1px solid var(--error);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
+        h1 { color: var(--text-main); font-size: 1.5rem; margin-bottom: 5px; text-align: center; }
+        h2 { text-align: center; color: var(--gold); margin-top: 0; }
 
-        .btn-locked {
+        /* --- BUTTONS --- */
+        .btn {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid var(--border);
-            color: var(--text-dim);
-            padding: 16px;
+            color: var(--text-main);
+            padding: 15px;
             border-radius: 8px;
             width: 100%;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-align: left;
+            cursor: pointer;
             font-family: inherit;
-            cursor: not-allowed;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-locked:hover { background: rgba(15, 23, 42, 0.9); border-color: var(--error); }
+        .btn:hover {
+            border-color: var(--gold);
+            background: rgba(251, 191, 36, 0.1);
+            padding-left: 20px;
+        }
+        .btn:hover::before {
+            content: "❄";
+            position: absolute;
+            left: 5px;
+            color: var(--gold);
+        }
 
         .btn-primary {
             background: var(--holiday-grad);
@@ -182,12 +176,56 @@
             cursor: pointer;
             width: 100%;
             margin-top: 10px;
-            transition: transform 0.2s;
             box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4); }
+        .btn-primary:hover { filter: brightness(1.1); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .option-btn {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 6px;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not([disabled]) {
+            border-color: var(--gold);
+            background: #1e293b;
+        }
+        .correct { border-color: var(--success) !important; background: rgba(16, 185, 129, 0.1) !important; color: var(--success); }
+        .wrong { border-color: var(--error) !important; background: rgba(239, 68, 68, 0.1) !important; color: var(--error); }
+
+        /* --- SCREENS --- */
+        .screen { display: none; height: 100%; flex-direction: column; }
+        .screen.active { display: flex; animation: fadeIn 0.4s ease; }
+        .hidden { display: none !important; }
+
+        /* --- QUIZ UTILS --- */
+        .quiz-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-bottom: 20px;
+        }
+        .timer-box {
+            font-weight: bold; color: var(--gold); background: #0f172a;
+            padding: 5px 12px; border-radius: 4px; border: 1px solid var(--border);
+        }
+        .score-display { font-size: 3rem; font-weight: bold; color: var(--gold); text-align: center; margin: 20px 0; }
+        
+        #review-container {
+            margin-top: 20px; padding-top: 10px; border-top: 1px solid var(--border);
+            text-align: left; max-height: 250px; overflow-y: auto;
+        }
+        .review-item {
+            background: #0f172a; padding: 10px; border-radius: 6px; margin-bottom: 10px; border: 1px solid var(--border); font-size: 0.85rem;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     </style>
 </head>
@@ -214,7 +252,7 @@
             <div style="font-size: 0.9rem; margin-bottom: 20px; color: var(--text-dim);">
                 Емтихан нәтижесін (балл) маған жазыңыз / <br>Напишите свой результат:
                 <br><br>
-                👉 <a href="https://t.me/akanaa0" target="_blank">@akanaa0</a>
+                👉 <a href="https://t.me/mukhtar_047" target="_blank">@mukhtar_047</a>
             </div>
 
             <button class="btn-primary" onclick="closeModal()">
@@ -224,69 +262,263 @@
     </div>
 
     <div class="container">
-        <h1>&lt;DevQuiz /&gt;</h1>
-        <div class="status-badge">SESSION CLOSED</div>
         
-        <p style="color: var(--gold); margin-bottom: 30px; font-weight: 500;">
-            Happy New Year 2026! 🐍
-        </p>
+        <div id="screen-menu" class="screen active">
+            <h1>&lt;DevQuiz /&gt;</h1>
+            <p style="color: var(--gold); margin-bottom: 30px;">Happy New Year 2026! 🐍</p>
+            
+            <div style="flex-grow: 1;">
+                <button class="btn" onclick="selectSubject('python')">Python (KZ)</button>
+                <button class="btn" onclick="selectSubject('db')">Database (KZ)</button>
+                <button class="btn" onclick="selectSubject('python_ru')">Python (RU)</button>
+                <button class="btn" onclick="selectSubject('db_ru')">Database (RU)</button>
+            </div>
 
-        <div>
-            <button class="btn-locked" onclick="holidayAlert()">
-                <span>Python (KZ)</span> <span>🔒</span>
-            </button>
-            <button class="btn-locked" onclick="holidayAlert()">
-                <span>Database (KZ)</span> <span>🔒</span>
-            </button>
-            <button class="btn-locked" onclick="holidayAlert()">
-                <span>Python (RU)</span> <span>🔒</span>
-            </button>
-            <button class="btn-locked" onclick="holidayAlert()">
-                <span>Database (RU)</span> <span>🔒</span>
-            </button>
+            <p style="font-size: 0.8rem; opacity: 0.5; text-align: center;">Select stack to start</p>
         </div>
 
-        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.5;">
-            See you next semester! <br>
-            ❄️ ❄️ ❄️
-        </p>
+        <div id="screen-variants" class="screen">
+            <h2 id="lbl-subject">...</h2>
+            <div id="list-variants" style="overflow-y: auto; flex-grow: 1; margin: 20px 0;"></div>
+            <button class="btn" onclick="goHome()">Back / Артқа</button>
+        </div>
+
+        <div id="screen-quiz" class="screen">
+            <div class="quiz-header">
+                <button class="btn" style="width: auto; padding: 5px 15px; margin: 0;" onclick="quitQuiz()">EXIT</button>
+                <div id="timer-display" class="timer-box">00:00</div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px;">
+                <span id="lbl-progress">...</span>
+                <span>Score: <span id="lbl-score" style="color: var(--gold)">0</span></span>
+            </div>
+
+            <div id="lbl-question" style="font-size: 1.1rem; margin-bottom: 20px; line-height: 1.5; min-height: 60px;">Loading...</div>
+            <div id="box-options"></div>
+            <div id="lbl-feedback" style="text-align: center; height: 20px; font-weight: bold; margin-top: 10px;"></div>
+            
+            <button id="btn-next" class="btn-primary hidden" onclick="nextQuestion()">NEXT >></button>
+        </div>
+
+        <div id="screen-result" class="screen">
+            <h2>System.out</h2>
+            <div class="score-display" id="lbl-result-pct">0%</div>
+            <p>Result: <span id="lbl-result-count" style="color: var(--success); font-weight: bold;">0</span> / <span id="lbl-total">0</span></p>
+            
+            <h3 style="text-align: left; font-size: 1rem; margin-bottom: 10px;">Review:</h3>
+            <div id="review-container"></div>
+            
+            <div style="margin-top: auto; padding-top: 20px;">
+                <button class="btn-primary" onclick="restartQuiz()">Try Again / Қайталау</button>
+                <button class="btn" onclick="quitQuiz()">Menu / Мәзір</button>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // --- SNOWFALL EFFECT ---
+        // --- SNOWFALL ---
         function createSnow() {
-            const snowCount = 30; // Number of snowflakes
+            const snowCount = 30;
             for(let i=0; i<snowCount; i++) {
                 const flake = document.createElement('div');
                 flake.className = 'snowflake';
-                flake.innerHTML = '❄'; // You can also use • or *
-                
-                // Randomize position and animation
+                flake.innerHTML = '❄';
                 flake.style.left = Math.random() * 100 + 'vw';
-                flake.style.animationDuration = (Math.random() * 3 + 2) + 's'; // 2-5 seconds
+                flake.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
                 flake.style.opacity = Math.random();
-                
                 document.body.appendChild(flake);
             }
         }
+        window.onload = createSnow;
 
-        // --- INTERACTION ---
+        // --- APP STATE ---
+        const TIME_LIMIT_SECONDS = 20;
+        let currentSubject = '';
+        let questions = [];
+        let qIndex = 0;
+        let score = 0;
+        let timer = null;
+        let timeLeft = 0;
+        let isAnswered = false;
+        let userAnswers = [];
+
+        // --- NAVIGATION ---
         function closeModal() {
             const overlay = document.getElementById('privacy-overlay');
             overlay.style.opacity = '0';
-            overlay.style.transition = 'opacity 0.5s';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 500);
+            setTimeout(() => { overlay.style.display = 'none'; }, 500);
         }
 
-        function holidayAlert() {
-            alert("🎅 Ho-ho-ho!\n\n[KZ] Емтихандар бітті, демалыңыз!\n[RU] Экзамены всё, отдыхайте!");
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
         }
 
-        // Init
-        window.onload = createSnow;
+        function goHome() { showScreen('screen-menu'); clearInterval(timer); }
+        function quitQuiz() { clearInterval(timer); goHome(); }
+
+        // --- QUIZ LOGIC ---
+        function selectSubject(subj) {
+            if (typeof database === 'undefined' || !database[subj]) {
+                alert("Error: Questions not found (questions.js missing?)");
+                return;
+            }
+            currentSubject = subj;
+            document.getElementById('lbl-subject').innerText = subj.toUpperCase();
+            
+            const list = document.getElementById('list-variants');
+            list.innerHTML = '';
+
+            Object.keys(database[subj]).forEach((key, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn';
+                btn.innerText = `📄 Variant ${i + 1}`;
+                btn.onclick = () => startQuiz(key);
+                list.appendChild(btn);
+            });
+            showScreen('screen-variants');
+        }
+
+        function startQuiz(key) {
+            questions = database[currentSubject][key];
+            qIndex = 0; score = 0; userAnswers = [];
+            showScreen('screen-quiz');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            isAnswered = false;
+            const q = questions[qIndex];
+            document.getElementById('lbl-progress').innerText = `Q ${qIndex + 1} / ${questions.length}`;
+            document.getElementById('lbl-score').innerText = score;
+            document.getElementById('lbl-question').innerText = q.q;
+            document.getElementById('lbl-feedback').innerText = "";
+            document.getElementById('btn-next').classList.add('hidden');
+            
+            const box = document.getElementById('box-options');
+            box.innerHTML = '';
+            
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, btn);
+                box.appendChild(btn);
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timeLeft = TIME_LIMIT_SECONDS;
+            document.getElementById('timer-display').innerText = `00:${timeLeft}`;
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer-display').innerText = `00:${timeLeft < 10 ? '0'+timeLeft : timeLeft}`;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timeIsUp();
+                }
+            }, 1000);
+        }
+
+        function timeIsUp() {
+            if(isAnswered) return;
+            document.getElementById('lbl-feedback').innerText = "TIMEOUT!";
+            document.getElementById('lbl-feedback').style.color = "var(--error)";
+            saveAnswer(-1); blockAll(); highlightCorrect();
+            document.getElementById('btn-next').classList.remove('hidden');
+        }
+
+        function checkAnswer(selectedIndex, btn) {
+            if(isAnswered) return;
+            isAnswered = true;
+            clearInterval(timer);
+            
+            const correctIdx = questions[qIndex].correct;
+            const isCorrect = selectedIndex === correctIdx;
+            
+            if(isCorrect) {
+                score++;
+                btn.classList.add('correct');
+                document.getElementById('lbl-feedback').innerText = "CORRECT / ДҰРЫС";
+                document.getElementById('lbl-feedback').style.color = "var(--success)";
+            } else {
+                btn.classList.add('wrong');
+                highlightCorrect();
+                document.getElementById('lbl-feedback').innerText = "WRONG / ҚАТЕ";
+                document.getElementById('lbl-feedback').style.color = "var(--error)";
+            }
+            
+            saveAnswer(selectedIndex, isCorrect);
+            document.getElementById('lbl-score').innerText = score;
+            blockAll();
+            document.getElementById('btn-next').classList.remove('hidden');
+        }
+
+        function saveAnswer(idx, isCorrect = false) {
+            userAnswers.push({
+                q: questions[qIndex].q,
+                opts: questions[qIndex].options,
+                correct: questions[qIndex].correct,
+                selected: idx,
+                isCorrect: isCorrect
+            });
+        }
+
+        function highlightCorrect() {
+            const correctIdx = questions[qIndex].correct;
+            document.querySelectorAll('.option-btn')[correctIdx].classList.add('correct');
+        }
+
+        function blockAll() {
+            document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+        }
+
+        function nextQuestion() {
+            qIndex++;
+            if(qIndex < questions.length) loadQuestion();
+            else showResult();
+        }
+
+        function showResult() {
+            showScreen('screen-result');
+            const pct = Math.round((score / questions.length) * 100);
+            document.getElementById('lbl-result-pct').innerText = pct + '%';
+            document.getElementById('lbl-result-count').innerText = score;
+            document.getElementById('lbl-total').innerText = questions.length;
+            
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
+            
+            userAnswers.forEach((a, i) => {
+                if(!a.isCorrect) {
+                    const item = document.createElement('div');
+                    item.className = 'review-item';
+                    item.innerHTML = `
+                        <div style="font-weight:bold; margin-bottom:5px;">Q${i+1}: ${a.q}</div>
+                        <div style="color:var(--success)">Correct: ${a.opts[a.correct]}</div>
+                        <div style="color:var(--error)">You: ${a.selected === -1 ? 'TIMEOUT' : a.opts[a.selected]}</div>
+                    `;
+                    container.appendChild(item);
+                }
+            });
+            
+            if(userAnswers.every(a => a.isCorrect)) {
+                container.innerHTML = '<p style="text-align:center; color:var(--success)">Perfect Score! 🎉</p>';
+            }
+        }
+
+        function restartQuiz() {
+            qIndex = 0; score = 0; userAnswers = [];
+            showScreen('screen-quiz');
+            loadQuestion();
+        }
     </script>
 </body>
 </html>
